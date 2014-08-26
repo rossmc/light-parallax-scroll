@@ -1,4 +1,4 @@
-light-parallax-scroll
+Light Weight Parallax Scroll
 =====================
 
 Simple light wight parallax scroll script. 
