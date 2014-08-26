@@ -8,3 +8,5 @@ It simply scrolls two elemnts at different speeds/direction in relation to the r
 I might add a demo with some markup in the future.
 
 Check out [this](https://medium.com/@dhg/parallax-done-right-82ced812e61c "Parallax Done Right") useful blog post with lots of good tips on parallax animations.
+
+You may also wish to add smooth scrolling to your site to give it a nicer effect, I followed [this method](http://bassta.bg/2013/05/smooth-page-scrolling-with-tweenmax/ "Smooth page scrolling with TweenMax").
