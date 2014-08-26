@@ -1,12 +1,13 @@
+$(document).ready(function(){
     /*********************
      PARALLAX SCROLL START
      ********************/
+     
+    // First a browser polyfill... 
     // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
     // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
     // requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
-
     // MIT license
-
     (function() {
         var lastTime = 0;
         var vendors = ['ms', 'moz', 'webkit', 'o'];
@@ -33,6 +34,7 @@
     }());
 
     // debounce is taken from _underscore.js
+    // http://underscorejs.org/#debounce
     function debounce(func, wait, immediate) {
         var timeout, args, context, timestamp, result;
         return function() {
@@ -57,6 +59,9 @@
         };
     }
 
+
+    // Start the requestAnimationFrame loop when the user begins scrolling and 
+    // kill it 100 milliseconds after the last scroll event using a flag.
     var requesting = false;
 
     var killRequesting = debounce(function () {
@@ -70,32 +75,41 @@
         }
         killRequesting();
     }
-    var prlx1 = jQ('.prlx-1');
-    var prlx2 = jQ('.prlx-2');
+    
+    
+    // cache jQuery selectors to which the animations will occur
+    var prlx1 = $('.prlx-element-1');
+    var prlx2 = $('.prlx-element-2');
+    
     function parallax(){
-        var prlx_effect_1= +(window.pageYOffset *.55).toFixed(2); // .55 for slow | .7 good for fast
+        // setting the speed for prlx_effect_1 to be by .55
+        // moving it down the page by ginving it a positive(+) value
+        var prlx_effect_1= +(window.pageYOffset *.55).toFixed(2); // Round values
         var prlx_str_1 = "translate3d(0, "+prlx_effect_1+"px, 0)";
-        jQ(prlx1).css({
+        $(prlx1).css({
             "transform":prlx_str_1,
             "-ms-transform":prlx_str_1,
             "-webkit-transform":prlx_str_1
         });
 
-        var prlx_effect_2= -(window.pageYOffset *.25 ).toFixed(2); // .2 for slow | .4 good for fast
+        // setting the speed for prlx_effect_1 to be by .25
+        // moving it up the page by ginving it a negative(-) value
+        var prlx_effect_2= -(window.pageYOffset *.25 ).toFixed(2); // Round values
         var prlx_str_2 = "translate3d(0, "+prlx_effect_2+"px, 0)";
-        jQ(prlx2).css({
+        // applying parallax effect to element
+        $(prlx2).css({
             "transform":prlx_str_2,
             "-ms-transform":prlx_str_2,
             "-webkit-transform":prlx_str_2
         });
 
-        if (requesting) {
+        if (requesting) {  // check the flag before calling itself again
             requestAnimationFrame(parallax);
         }
     }
-    if(jQ(".cms-index-index.cms-home").length != 0){
-        window.addEventListener("scroll", onScroll, false);
-    }
+    
+    window.addEventListener("scroll", onScroll, false);
     /*******************
      PARALLAX SCROLL END
      ******************/
+});
