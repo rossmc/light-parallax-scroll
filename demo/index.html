@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 	<style type="text/css">
 
-		.prlx-element-1, .prlx-element-2{
+		.prlx-down, .prlx-up, .prlx-down-right, .prlx-up-spin{
 			position: relative;
 		}
 		section.background 	{
@@ -27,26 +27,61 @@
 			background-image: url(images/underwater-bg.jpg);
 		}
 
-		h2 {
-			background: #fff;
+		.message {
 			display: inline-block;
+			background: #fff;
+			color: #333;	
+			font-size: 18px;
+			line-height: 26px;
 			font-family: sans-serif;
-			padding: 5px;
+			text-align: center;
+			max-width: 360px;		
+			padding: 15px;
 			border-radius: 5px;
-			left: 20%;
+		}
+
+		section.background.top .message{
+			left: 50%;
 			top: 200px;
+		}
+		section.background.top .hero-image{
+			left: 20%;
+			top: 60px;
+		}
+
+		section.background.middle .message{
+			left: 10%;
+			top: 100px;
+		}
+		section.background.middle .hero-image{
+			left: 70%;
+			top: 125px;
+		}
+
+		section.background.bottom .message{
+			left: 10%;
+			top: 200px;
+		}
+		section.background.bottom .hero-image{
+			left: 50%;
+			top: -230px;
 		}
 	</style>
 </head>
 <body>
 	<section class="top background">
-		<h2 class="prlx-element-2">Some Message Here</h2>
+		<h2 class="prlx-down message">And God said let there be Parallax scrolling <br />
+		and it was lightweight</h2>
+		<div class="hero-image prlx-up"><img src="images/god.png"></div>
 	</section>
 	<section class="middle background">
-		<h2 class="prlx-element-1">Some Message Here</h2>
+		<h2 class="prlx-down message">Both the message and hero image scroll at different speeds and in different directions</h2>
+		<div class="hero-image prlx-up-spin"><img src="images/ball.png"></div>
 	</section>
 	<section class="bottom background">
-		<h2 class="prlx-element-2">Some Message Here</h2>
+		<h2 class="prlx-up message">The background images just use css <br />
+		background-attachment: fixed;</h2>
+		<div class="hero-image prlx-down-right"><img src="images/diver.gif"></div>
 	</section>
 </body>
 </html>

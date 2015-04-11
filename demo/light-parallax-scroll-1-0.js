@@ -1,17 +1,13 @@
-$(document).ready(function(){
-    /*********************
-     PARALLAX SCROLL START
-     ********************/
-     
+$(document).ready(function () {    
     // First a browser polyfill... 
     // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
     // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
     // requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
     // MIT license
-    (function() {
+    (function () {
         var lastTime = 0;
         var vendors = ['ms', 'moz', 'webkit', 'o'];
-        for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        for ( var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
             window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
             window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
                 || window[vendors[x]+'CancelRequestAnimationFrame'];
@@ -60,6 +56,12 @@ $(document).ready(function(){
     }
 
 
+    // cache jQuery selectors to which the animations will occur
+    var prlxDown = $('.prlx-down');
+    var prlxUp = $('.prlx-up');
+    var prlxDownRight = $('.prlx-down-right');
+    var prlxUpSpin = $('.prlx-up-spin');
+
     // Start the requestAnimationFrame loop when the user begins scrolling and 
     // kill it 100 milliseconds after the last scroll event using a flag.
     var requesting = false;
@@ -75,32 +77,47 @@ $(document).ready(function(){
         }
         killRequesting();
     }
-    
-    
-    // cache jQuery selectors to which the animations will occur
-    var prlx1 = $('.prlx-element-1');
-    var prlx2 = $('.prlx-element-2');
-    
+        
     function parallax(){
-        // setting the speed for prlx_effect_1 to be by .55
-        // moving it down the page by ginving it a positive(+) value
-        var prlx_effect_1= +(window.pageYOffset *.55).toFixed(2); // Round values
-        var prlx_str_1 = "translate3d(0, "+prlx_effect_1+"px, 0)";
-        $(prlx1).css({
-            "transform":prlx_str_1,
-            "-ms-transform":prlx_str_1,
-            "-webkit-transform":prlx_str_1
+        // prlxDownAnim 
+        // setting the speed/animation effect to be a multiple of the windows Y scroll position
+        // moving it down the page by giving it a positive(+) value
+        var prlxDownAnim= ( window.pageYOffset * .55 ).toFixed(2); // Rounding the value
+        // putting value into a string for the transform css property
+        var prlxDownStr = "translate3d(0, " + prlxDownAnim + "px, 0)"; 
+        // applying parallax effect to element      
+        $(prlxDown).css({
+            "transform":prlxDownStr,
+            "-ms-transform":prlxDownStr,
+            "-webkit-transform":prlxDownStr
         });
 
-        // setting the speed for prlx_effect_1 to be by .25
-        // moving it up the page by ginving it a negative(-) value
-        var prlx_effect_2= -(window.pageYOffset *.25 ).toFixed(2); // Round values
-        var prlx_str_2 = "translate3d(0, "+prlx_effect_2+"px, 0)";
-        // applying parallax effect to element
-        $(prlx2).css({
-            "transform":prlx_str_2,
-            "-ms-transform":prlx_str_2,
-            "-webkit-transform":prlx_str_2
+        // prlxUpAnim
+        // moving it up the page by giving it a negative(-) value
+        var prlxUpAnim= - ( window.pageYOffset * .25 ).toFixed(2); 
+        var prlxUpStr = "translate3d(0, " + prlxUpAnim + "px, 0)";
+        $(prlxUp).css({
+            "transform":prlxUpStr,
+            "-ms-transform":prlxUpStr,
+            "-webkit-transform":prlxUpStr
+        });
+
+        // prlxUpSpinAnim
+        var prlxUpSpinAnim= ( window.pageYOffset * .35 ).toFixed(2);
+        var prlxUpSpinStr = "rotate(" + prlxUpSpinAnim + "deg) translate3d(0, " + prlxUpAnim + "px, 0)";
+        $(prlxUpSpin).css({
+            "transform":prlxUpSpinStr,
+            "-ms-transform":prlxUpSpinStr,
+            "-webkit-transform":prlxUpSpinStr
+        });
+
+        // prlxDownRightAnim
+        var prlxDownRightAnim= ( window.pageYOffset * .45  ).toFixed(2);
+        var prlxDownRightStr = "translate3d(" + prlxDownRightAnim + "px, " + prlxDownAnim + "px, 0)";
+        $(prlxDownRight).css({
+            "transform":prlxDownRightStr,
+            "-ms-transform":prlxDownRightStr,
+            "-webkit-transform":prlxDownRightStr
         });
 
         if (requesting) {  // check the flag before calling itself again
@@ -109,7 +126,4 @@ $(document).ready(function(){
     }
     
     window.addEventListener("scroll", onScroll, false);
-    /*******************
-     PARALLAX SCROLL END
-     ******************/
 });
