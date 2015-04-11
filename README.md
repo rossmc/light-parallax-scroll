@@ -1,11 +1,9 @@
 Lightweight Parallax Scroll
 =====================
 
-Simple lightweight parallax scroll script. 
+Simple lightweight parallax scroll script. The intention is for this script to be used as a starting point for developing your own custom parallax effects.
 
-It simply scrolls elemnts at different speeds/direction in relation to the rest of the DOM.  Four parallax effects have been defined in the script but more can easily be added as you need them.
-
-The intention is for this script to be used as a starting point for developing your own custom parallax effects.
+It simply scrolls elements at different speeds/direction in relation to the rest of the DOM.  Four parallax effects have been defined in the script but more can easily be added as you need them.
 
 Check out [this](https://medium.com/@dhg/parallax-done-right-82ced812e61c "Parallax Done Right") useful blog post with lots of good tips on parallax animations.
 
