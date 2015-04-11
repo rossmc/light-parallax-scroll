@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Demo - light parallax scroll</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="light-parallax-scroll-1-0.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+	<style type="text/css">
+
+		.prlx-element-1, .prlx-element-2, .background{
+			position: relative;
+		}
+		section.background 	{
+			background-attachment: fixed;
+			background-origin: initial;
+			background-clip: initial;
+			background-repeat: no-repeat;
+			background-size: auto;
+			height: 450px;
+			width: 100%;
+		}
+		section.background.top {
+			background-image: url(images/sky-bg.jpg);
+		}
+		section.background.middle {
+			background-image: url(images/pitch-bg.jpg);
+		}
+		section.background.bottom {
+			background-image: url(images/underwater-bg.jpg);
+		}
+
+		h2 {
+			background: #fff;
+			display: inline-block;
+			font-family: sans-serif;
+			padding: 5px;
+			border-radius: 5px;
+			left: 20%;
+			top: 200px;
+		}
+	</style>
+</head>
+<body>
+	<section class="top background">
+		<h2 class="prlx-element-2">Some Message Here</h2>
+	</section>
+	<section class="middle background">
+		<h2 class="prlx-element-1">Some Message Here</h2>
+	</section>
+	<section class="bottom background">
+		<h2 class="prlx-element-2">Some Message Here</h2>
+	</section>
+</body>
+</html>
