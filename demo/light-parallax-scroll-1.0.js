@@ -1,4 +1,83 @@
 $(document).ready(function () {    
+    // cache jQuery selectors to which the parallax animations will occur
+    var prlxDown = $('.prlx-down');
+    var prlxUp = $('.prlx-up');
+    var prlxDownRight = $('.prlx-down-right');
+    var prlxUpSpin = $('.prlx-up-spin');
+    // set the parallax value vars used for setting setting the speed and direction, 
+    // it is calculated in the getYOffsetValue() function with the position of the Y scroll position.
+    // A positive value moves the element down the page or infront of the x axis, 
+    // while a negative value moves it up the page or behind the x axis.
+    var prlxDownValue = .55;
+    var prlxUpValue = -.25;
+    var prlxUpSpinValue = .35;
+    var prlxDownRightValue = .45;
+    // declare the vars which will be used to hold the css transform property values in the parallax() function.
+    var prlxDownStr;
+    var prlxUpStr;
+    var prlxUpSpinStr;
+    var prlxDownRightStr;
+    // set a variable flag which will be used to check weather to run the animations or not.
+    var requesting = false;
+    
+    // Use the debounce() function to kill the animations 100 milliseconds after the last scroll event using the requesting flag.
+    var killRequesting = debounce(function () {
+        requesting = false;
+    }, 100);
+
+    window.addEventListener("scroll", onScroll, false); // Start the parallax animations on the scroll event by calling the onScroll function.
+
+    function onScroll() {
+        if (!requesting) {  // checks to see that the requesting flag is false before running the animations.
+            requesting = true;
+            requestAnimationFrame(parallax);  // using requestAnimationFrame browser API to perfomr cheaper animations
+        }
+        killRequesting();
+    }
+        
+    function parallax() {  // animations drawn on the page by changeing the css transform properties
+        // prlxDown
+        prlxDownStr = "translate3d(0, " + getYOffsetValue(prlxDownValue) + "px, 0)";  // putting the transform property into a string
+        $(prlxDown).css({  // applying parallax effect to element  
+            "transform":prlxDownStr,
+            "-ms-transform":prlxDownStr,
+            "-webkit-transform":prlxDownStr
+        });
+
+        // prlxUp
+        prlxUpStr = "translate3d(0, " + getYOffsetValue(prlxUpValue) + "px, 0)";
+        $(prlxUp).css({
+            "transform":prlxUpStr,
+            "-ms-transform":prlxUpStr,
+            "-webkit-transform":prlxUpStr
+        });
+
+        // prlxUpSpin
+        prlxUpSpinStr = "rotate(" + getYOffsetValue(prlxUpSpinValue) + "deg) translate3d(0, " + getYOffsetValue(prlxUpValue) + "px, 0)";
+        $(prlxUpSpin).css({
+            "transform":prlxUpSpinStr,
+            "-ms-transform":prlxUpSpinStr,
+            "-webkit-transform":prlxUpSpinStr
+        });
+
+        // prlxDownRight
+        prlxDownRightStr = "translate3d(" + getYOffsetValue(prlxDownRightValue) + "px, " + getYOffsetValue(prlxDownValue) + "px, 0)";
+        $(prlxDownRight).css({
+            "transform":prlxDownRightStr,
+            "-ms-transform":prlxDownRightStr,
+            "-webkit-transform":prlxDownRightStr
+        });
+
+        function getYOffsetValue(prlxValue) {
+            // setting the speed/Value ation effect to be a multiple of the windows Y scroll position
+            return ( window.pageYOffset * prlxValue ).toFixed(2)
+        }
+
+        if (requesting) {  // check the flag before calling itself again
+            requestAnimationFrame(parallax);
+        }
+    }
+
     // First a browser polyfill... 
     // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
     // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
@@ -54,76 +133,4 @@ $(document).ready(function () {
             return result;
         };
     }
-
-
-    // cache jQuery selectors to which the animations will occur
-    var prlxDown = $('.prlx-down');
-    var prlxUp = $('.prlx-up');
-    var prlxDownRight = $('.prlx-down-right');
-    var prlxUpSpin = $('.prlx-up-spin');
-
-    // Start the requestAnimationFrame loop when the user begins scrolling and 
-    // kill it 100 milliseconds after the last scroll event using a flag.
-    var requesting = false;
-
-    var killRequesting = debounce(function () {
-        requesting = false;
-    }, 100);
-
-    function onScroll() {
-        if (!requesting) {
-            requesting = true;
-            requestAnimationFrame(parallax);
-        }
-        killRequesting();
-    }
-        
-    function parallax(){
-        // prlxDownAnim 
-        // setting the speed/animation effect to be a multiple of the windows Y scroll position
-        // moving it down the page by giving it a positive(+) value
-        var prlxDownAnim= ( window.pageYOffset * .55 ).toFixed(2); // Rounding the value
-        // putting value into a string for the transform css property
-        var prlxDownStr = "translate3d(0, " + prlxDownAnim + "px, 0)"; 
-        // applying parallax effect to element      
-        $(prlxDown).css({
-            "transform":prlxDownStr,
-            "-ms-transform":prlxDownStr,
-            "-webkit-transform":prlxDownStr
-        });
-
-        // prlxUpAnim
-        // moving it up the page by giving it a negative(-) value
-        var prlxUpAnim= - ( window.pageYOffset * .25 ).toFixed(2); 
-        var prlxUpStr = "translate3d(0, " + prlxUpAnim + "px, 0)";
-        $(prlxUp).css({
-            "transform":prlxUpStr,
-            "-ms-transform":prlxUpStr,
-            "-webkit-transform":prlxUpStr
-        });
-
-        // prlxUpSpinAnim
-        var prlxUpSpinAnim= ( window.pageYOffset * .35 ).toFixed(2);
-        var prlxUpSpinStr = "rotate(" + prlxUpSpinAnim + "deg) translate3d(0, " + prlxUpAnim + "px, 0)";
-        $(prlxUpSpin).css({
-            "transform":prlxUpSpinStr,
-            "-ms-transform":prlxUpSpinStr,
-            "-webkit-transform":prlxUpSpinStr
-        });
-
-        // prlxDownRightAnim
-        var prlxDownRightAnim= ( window.pageYOffset * .45  ).toFixed(2);
-        var prlxDownRightStr = "translate3d(" + prlxDownRightAnim + "px, " + prlxDownAnim + "px, 0)";
-        $(prlxDownRight).css({
-            "transform":prlxDownRightStr,
-            "-ms-transform":prlxDownRightStr,
-            "-webkit-transform":prlxDownRightStr
-        });
-
-        if (requesting) {  // check the flag before calling itself again
-            requestAnimationFrame(parallax);
-        }
-    }
-    
-    window.addEventListener("scroll", onScroll, false);
 });
