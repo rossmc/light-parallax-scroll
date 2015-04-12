@@ -19,7 +19,7 @@ Next add one of the following css classes to the the div which you wish to add t
 ```
 .prlx-down, .prlx-up, .prlx-down-right, .prlx-up-spin
 ```
-You may also wish to give the above css classes a relative, absolute or fixed css position.
+You may also wish to give the above css classes a relative, absolute or fixed css position.  Check the [demo](http://rossmchugh.com/demos/light-parallax-scroll/ "Light Parallax Scroll") to see an example of how css can be applied.
 
 For parallax background images you only need to give them the css property of:
 ```
