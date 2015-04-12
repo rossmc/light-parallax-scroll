@@ -5,9 +5,9 @@ Simple lightweight parallax scroll script. The intention is for this script to b
 
 It simply scrolls elements at different speeds/direction in relation to the rest of the DOM.  Four parallax effects have been defined in the script but more can easily be added as you need them.
 
-Have a look at the demo [here](http://rossmchugh.com/demos/light-parallax-scroll/ "Light Parallax Scroll").  And for more information see my [blog post](http://rossmchugh.com/lightweight-parallax-scrolling/).
+Have a look at the [demo here](http://rossmchugh.com/demos/light-parallax-scroll/ "Light Parallax Scroll").  And for more information see my [blog post](http://rossmchugh.com/lightweight-parallax-scrolling/).
 
-You may also wish to **add smooth scrolling** to your site to give it a nicer effect, I followed [this method](http://bassta.bg/2013/05/smooth-page-scrolling-with-tweenmax/ "Smooth page scrolling with TweenMax").
+You may also wish to **add smooth scrolling** to your site to give it a nicer effect, I followed [this method with TweenMax](http://bassta.bg/2013/05/smooth-page-scrolling-with-tweenmax/ "Smooth page scrolling with TweenMax").
 
 #### Set Up
 Add the script to the head section of your html doc.  It requires jQuery.
